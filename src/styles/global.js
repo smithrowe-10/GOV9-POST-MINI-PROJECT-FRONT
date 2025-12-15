@@ -7,7 +7,7 @@ export const global = css`
     html {
         height: 100vh;
         background-color: #fafafa;   
-        font-family: "Nanum Pen Script", cursive;
+        font-family: "Noto Sans KR", sans-serif;
         font-optical-sizing: auto;
         font-size: 16px;
     }
