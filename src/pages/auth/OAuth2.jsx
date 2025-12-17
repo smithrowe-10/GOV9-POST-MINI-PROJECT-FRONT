@@ -1,20 +1,21 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useMeQuery } from "../../queries/usersQueries";
 
 function OAuth2() {
     const navigate = useNavigate();
     const [ searchParams ] = useSearchParams();
     const accessToken = searchParams.get("accessToken");
 
+    
+    if (!!accessToken) {
+        localStorage.setItem("AccessToken", accessToken);
+    }
+    const meQuery = useMeQuery();
+
     useEffect(() => {
-        console.log(accessToken);
-        if (!!accessToken) {
-            alert("로그인 성공");
-        } else {
-            alert("로그인 후 이용바랍니다.");
-            navigate("/auth/login");
-        }
-    }, [accessToken]);
+        console.log(meQuery.data)
+    }, [meQuery.data]);
 
     return <></>
 }

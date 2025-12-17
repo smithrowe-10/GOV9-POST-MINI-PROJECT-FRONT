@@ -18,10 +18,9 @@ function AuthRoute() {
     return <Routes>
         <Route path="/" element={<></>} />
         <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/login/oauth2" element={<OAuth2 />} />
+        <Route path="/auth/login/oauth2" element={<OAuth2 />} />    
         <Route path="/auth/signup" element={<SignUp />} />
     </Routes>
 }
 
 export default AuthRoute;
-// 오늘 암것도안함
