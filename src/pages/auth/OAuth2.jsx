@@ -3,9 +3,9 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useMeQuery } from "../../queries/usersQueries";
 
 function OAuth2() {
-    const navigate = useNavigate();
     const [ searchParams ] = useSearchParams();
     const accessToken = searchParams.get("accessToken");
+    const navigate = useNavigate();
 
     
     if (!!accessToken) {
@@ -14,7 +14,17 @@ function OAuth2() {
     const meQuery = useMeQuery();
 
     useEffect(() => {
-        console.log(meQuery.data)
+        const { isLoading, data } = meQuery;
+        if (!isLoading) {
+            if (data.status !== 200) {
+                alert("인증이 필요합니다.");
+                navigate("/auth/login");
+            } else {
+                alert("로그인 성공");
+                navigate("/");
+            }
+        }
+
     }, [meQuery.data]);
 
     return <></>

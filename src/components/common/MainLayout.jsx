@@ -2,12 +2,11 @@
 
 import  * as s  from "./styles";
 
-function MainLayout(props) {
-    console.log(props)
+function MainLayout({children}) {
     return <div css={s.layout}>
         <div css={s.frame}>
             <div css={s.frameContainer}>
-                {props.children}
+                {children}
             </div>
         </div>
     </div>
