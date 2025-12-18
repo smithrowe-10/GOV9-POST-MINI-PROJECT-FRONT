@@ -18,7 +18,7 @@ function AuthRoute() {
 
     // userEntity정보 AccessToken, 상태, 에러 등등 담겨있음
     const meQuery = useMeQuery();
-    console.log(meQuery);
+    // console.log(meQuery);
 
     useEffect(() => {
         // 구조분해할당으로 meQuery에서 isLoading과 data를 가져옴

@@ -1,66 +1,67 @@
 import { css } from "@emotion/react";
-export const layout =css`
-    
+
+export const layout = css`
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
-    display: flex;
 `;
 
 export const frame = css`
-    box-sizing: border-box;
     display: flex;
+    box-sizing: border-box;
     border: 3px solid #747474;
-    height: 650px;
-    width: 1000px;
-    padding:30px;
-    background-color:black;
     border-radius: 30px;
+    padding: 30px;
+    width: 1000px;
+    height: 650px;
+    background-color: #000000;
 `;
 
-export const frameContainer= css`
-    width: 100%;
-    height: 100%;
+export const frameContainer = css`
     position: relative;
     box-sizing: border-box;
     border-radius: 10px;
-    background-color: beige;
-    overflow: hidden;
-
-    
-`;
-/////////////////////////////////////////<<  LOADING  >>////////////////////
-export const loadingBox = css`
-    position: absolute;
-    top:0;
-    left: 0;
     width: 100%;
     height: 100%;
+    background-color: #f3f5f7;
+    overflow: hidden;
+`;
+
+
+
+////////////<< Loading >>////////////
+export const loadingBox = css`
     display: flex;
-    position: absolute;
-    z-index: 99;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
     background-color: #00000066;
 `;
-/////////////////////////////////////////<<  Leftsidebar  >>////////////////////
+
+////////////<< LeftSideBar >>////////////
+
 export const sideBarLayout = css`
     display: flex;
     width: 100%;
     height: 100%;
-
-    
 `;
+
 export const sideBarContainer = css`
+    display: flex;
+    flex-direction: column;
     width: 200px;
     height: 100%;
-    background-color: white;
-    flex-direction: column;
-    display: flex;
+    background-color: #ffffff;
     box-shadow: 0 0 5px #00000055;
 
-    & > h1{
+    & > h1 {
         margin: 20px;
         font-size: 20px;
         text-align: center;
@@ -71,52 +72,50 @@ export const sideBarContainer = css`
             transform: scale(105%);
         }
     }
-    & > ul{
-        padding: 0;
+
+    & > ul {
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
         margin: 0;
-            list-style-type: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex-grow: 1;
-        
-        & > a{
+        padding: 0;
+        gap: 8px;
+        flex-grow: 1;
+        & > a {
             text-decoration: none;
-            color: black;
-            
-          
+            color: #222222;
         }
     }
+
     & > div {
         display: flex;
         justify-content: center;
         padding: 20px;
 
-        &>a{
-            font-weight: 500;
-            color:#222222;
+        & > a {
             text-decoration: none;
-            text-shadow: 0 0 10px #000000;
+            color: #222222;
+            font-weight: 500;
+            text-shadow: 0 0 10px #00000088;
         }
     }
-
 `;
-export const menuListItem = (isSelected) =>css`
-    
+
+export const menuListItem = (isSelected) => css`
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 5px 15px;
     width: 100%;
     height: 35px;
-    box-sizing: border-box;
-    align-items: center;
-    display: flex;
-    padding : 5px 15px;
     font-weight: 500;
     transition: all 0.1s ease-in-out;
-    box-shadow: 0 0 ${isSelected ? "10px 10px": "0 0"} #0000000f inset;
+    box-shadow: 0 0 ${isSelected ? "10px 10px" : "0 0"} #0000000f inset;
     &:hover {
-        text-shadow: 0 0 10px #00000055;
+        text-shadow: 0 0 15px #00000066;
     }
-    
-    & > div{
+
+    & > div {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -127,7 +126,6 @@ export const menuListItem = (isSelected) =>css`
     }
 `;
 
-// 이미지 잘 다루는 법
 export const profileImg = (url) => css`
     border-radius: 50%;
     width: 25px;
@@ -136,4 +134,4 @@ export const profileImg = (url) => css`
     background-image: url(${url});
     background-position: center;
     background-size: cover;
-`
+`;
