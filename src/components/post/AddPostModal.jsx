@@ -1,21 +1,54 @@
 /** @jsxImportSource @emotion/react */
-// https://www.npmjs.com/package/react-modal
 import ReactModal from "react-modal";
-import  * as s  from "./styles";
-import Loading from "../common/Loading";
+import * as s from "./styles";
 import { useMeQuery } from "../../queries/usersQueries";
+import Loading from "../common/Loading";
 import Select from "react-select";
 import { IoCloudUploadOutline } from "react-icons/io5";
+import { IoIosClose } from "react-icons/io";
+import { useRef, useState } from "react";
 
-// - isOpen: 모달을 열지 말지 결정하는 True/False 값
-// - onRequestClose: 모달 바깥을 누르거나 ESC를 누를 때 실행될 닫기 함수
-// - layoutRef: 모달이 어디를 기준으로 뜰지 지정하는 참조점(보통 MainLayout)
 function AddPostModal({isOpen, onRequestClose, layoutRef}) {
-
+    const [ uploadImages, setUploadImages ] = useState([]);
+    const imageListBoxRef = useRef();
     const {isLoading, data} = useMeQuery();
 
+    const handleOnWheel = (e) => {  
+        imageListBoxRef.current.scrollLeft += e.deltaY;
+    }
+
+    const handleFileLoadOnClick = () => {
+        const fileInput = document.createElement("input");
+        fileInput.setAttribute("type", "file");
+        fileInput.setAttribute("accept", "image/*");
+        fileInput.setAttribute("multiple", "true");
+        fileInput.click();
+
+        fileInput.onchange = (e) => {
+            const {files} = e.target;
+            const fileArray = Array.from(files);
+
+            const readFile = (file) => new Promise((resolve) => {
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = (e) => {
+                    resolve({
+                        file,
+                        dataURL: e.target.result,
+                    });
+                }
+            });
+
+            Promise
+            .all(fileArray.map(file => readFile(file)))
+            .then(result => {
+                setUploadImages([...uploadImages, ...result]);
+            });
+        }
+    }
+
     if (isLoading) {
-        return <Loading/>
+        return <Loading />
     }
 
     return <ReactModal 
@@ -27,7 +60,7 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#00000055"
+                backgroundColor: "#00000000"
             },
             content: {
                 position: "static",
@@ -37,8 +70,6 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
         }}
         isOpen={isOpen} 
         onRequestClose={onRequestClose}
-        // [중요] 모달이 렌더링될 '부모 태그'를 layoutRef가 가리키는 곳으로 지정
-        // 이렇게 하면 화면 전체가 아니라 Layout 영역 안에서만 모달이 보임
         parentSelector={() => layoutRef.current}
         appElement={layoutRef.current}
         ariaHideApp={false}>
@@ -54,31 +85,39 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
                     <Select
                         options={[
                             {
-                            label: "Public",
-                            value: "Public"
+                                label: "Public",
+                                value: "Public"
                             },
                             {
-                            label: "Follow",
-                            value: "Follow"
+                                label: "Follow",
+                                value: "Follow"
                             },
-                    ]} />
+                        ]} />
                     <div css={s.contentInputBox}>
                         <textarea></textarea>
                     </div>
-                    <div>
+                    <div css={s.uploadBox} onClick={handleFileLoadOnClick}>
                         <IoCloudUploadOutline />
                         <div>Please post your story.</div>
                         <button>Add Image</button>
                     </div>
-                    <div></div>
+                    <div css={s.imageListBox} ref={imageListBoxRef} onWheel={handleOnWheel}>
+                        {
+                            uploadImages.map(img => (
+                                <div css={s.preview(img.dataURL)}>
+                                    <div><IoIosClose /></div>
+                                </div>
+                            ))
+                        }
+                        
+                    </div>
                 </main>
                 <footer>
                     <button css={s.postButton}>Post</button>
-                    <button onClick={onRequestClose}>Cancle</button>
+                    <button onClick={onRequestClose}>Cancel</button>
                 </footer>
             </div>
     </ReactModal>
-
 }
 
 export default AddPostModal;
