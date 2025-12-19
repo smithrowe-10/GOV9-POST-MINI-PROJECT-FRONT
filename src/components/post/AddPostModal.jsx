@@ -66,6 +66,7 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
         try {
             createPostMutation.mutateAsync(formData);
             alert("작성 완료");
+            onRequestClose();
         } catch (error) {
             alert(error.response.data.message);
         }
