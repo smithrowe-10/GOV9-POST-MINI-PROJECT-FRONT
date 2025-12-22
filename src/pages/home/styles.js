@@ -9,6 +9,9 @@ export const layout = css`
 `;
 
 export const feedContainer = css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
     width: 65%;
     overflow-y: auto;
@@ -27,8 +30,10 @@ export const followInfoContainer = css`
 
 export const feedItemContainer = css`
     margin: 10px;
+    box-sizing: border-box;
     border-radius: 8px;
     padding: 10px;
+    width:400px;
     background-color: #fff;
     box-shadow: 0 0 10px #00000066;
 
@@ -69,7 +74,14 @@ export const userInfo = css`
 `
 
 export const feedImageContainer = css`
-    
+
+    & > slick-prev {
+        left: 25px;
+    }
+
+    & > slick-next {
+        right: 25px;
+    }
 `
 
 export const feedContentContainer = css`
@@ -78,6 +90,9 @@ export const feedContentContainer = css`
     width: 100%;
     text-overflow: ellipsis;
     white-space: pre-wrap;
+    word-wrap: break-word;
     font-size: 14px;
     color: #222;
 ` 
+// npm install react-slick --save
+// npm install slick-carousel --save
