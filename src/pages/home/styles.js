@@ -66,5 +66,4 @@ export const userInfo = css`
         font-size: 10px;
         color: #888;
     }
-
 `
