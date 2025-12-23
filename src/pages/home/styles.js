@@ -17,31 +17,35 @@ export const feedContainer = css`
     overflow-y: auto;
 
     &::-webkit-scrollbar {
-        display:none
+        display: none;
     }
-`
+`;
 
 export const followInfoContainer = css`
-    margin-top: 20px;
     box-sizing: border-box;
+    margin-top: 20px;
     padding-left: 20px;
     width: 35%;
-`
+`;  
 
 export const feedItemContainer = css`
     margin: 10px;
     box-sizing: border-box;
     border-radius: 8px;
     padding: 10px;
-    width:400px;
-    background-color: #fff;
+    width: 400px;
+    background-color: #ffffff;
     box-shadow: 0 0 10px #00000066;
 
     & > header {
         display: flex;
         height: 40px;
     }
-`
+
+    & > main {
+
+    }
+`;
 
 export const profileImage = (url) => css`
     margin-right: 10px;
@@ -53,35 +57,50 @@ export const profileImage = (url) => css`
     background-image: url(${url});
     background-position: center;
     background-size: cover;
-`
+`;
 
 export const userInfo = css`
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    justify-content: center;
     height: 100%;
 
     & > div:nth-of-type(1) {
         font-size: 14px;
         font-weight: 500;
-        color: #222;
+        color: #222222;
     }
 
     & > div:nth-of-type(2) {
         font-size: 10px;
-        color: #888;
+        color: #888888;
     }
-`
+`;
 
 export const feedImageContainer = css`
-
-    & > slick-prev {
+    & .slick-prev {
         left: 25px;
+        z-index: 2;
+        &::before {
+            color: black;
+        }
     }
 
-    & > slick-next {
+    & .slick-next {
         right: 25px;
+        z-index: 2;
+        &::before {
+            color: black;
+        }
     }
+`;
+
+export const feedImage = (url) => css`
+    width: 100%;
+    height: 300px;
+    background-image: url(${url});
+    background-position: center;
+    background-size: cover;
 `
 
 export const feedContentContainer = css`
@@ -92,7 +111,5 @@ export const feedContentContainer = css`
     white-space: pre-wrap;
     word-wrap: break-word;
     font-size: 14px;
-    color: #222;
-` 
-// npm install react-slick --save
-// npm install slick-carousel --save
+    color: #222222;
+`;
